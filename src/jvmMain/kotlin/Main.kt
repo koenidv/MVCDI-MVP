@@ -10,8 +10,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 
-data class UserModel(var name: MutableState<String>) {
-    constructor(name: String) : this(mutableStateOf(name))
+class UserModel(initial: String) {
+    var name by mutableStateOf(initial)
 }
 
 @Composable
@@ -32,10 +32,10 @@ fun main() = application {
     val user = UserModel("Hello, SE_03!")
 
     fun handleTextChanged(newText: String) {
-        user.name.value = newText
+        user.name = newText
     }
 
     Window(onCloseRequest = ::exitApplication, title = "SE_03") {
-        userView(user.name.value, ::handleTextChanged)
+        userView(user.name, ::handleTextChanged)
     }
 }
